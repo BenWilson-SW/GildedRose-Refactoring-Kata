@@ -59,4 +59,22 @@ public class GildedRoseTest
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(8));
     }
+    
+    [Test]
+    public void SulfurasSellInDoesNotDecrease()
+    {
+        var items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 10, Quality = 0 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].SellIn, Is.EqualTo(10));
+    }
+    
+    [Test]
+    public void SulfurasQualityDoesNotDecrease()
+    {
+        var items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 10, Quality = 80 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(80));
+    }
 }
