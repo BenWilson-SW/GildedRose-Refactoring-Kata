@@ -10,6 +10,7 @@ public class GildedRoseTest
     const String NORMAL_ITEM_NAME = "Example";
     const String SULFURAS_ITEM_NAME = "Sulfuras, Hand of Ragnaros";
     const String AGED_BRIE_ITEM_NAME = "Aged Brie";
+    const String BACKSTAGE_PASS_ITEM_NAME = "Backstage passes to a TAFKAL80ETC concert";
     
     [Test]
     public void PositiveItemSellInDecreases()
@@ -90,5 +91,41 @@ public class GildedRoseTest
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(2));
+    }
+    
+    [Test]
+    public void BackstagePassQualityIncreases()
+    {
+        var items = new List<Item> { new Item { Name = BACKSTAGE_PASS_ITEM_NAME, SellIn = 15, Quality = 0 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(1));
+    }
+    
+    [Test]
+    public void BackstagePassQualityIncreasesDoubleAtTen()
+    {
+        var items = new List<Item> { new Item { Name = BACKSTAGE_PASS_ITEM_NAME, SellIn = 10, Quality = 0 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(2));
+    }
+    
+    [Test]
+    public void BackstagePassQualityIncreasesTripleAtFive()
+    {
+        var items = new List<Item> { new Item { Name = BACKSTAGE_PASS_ITEM_NAME, SellIn = 5, Quality = 0 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(3));
+    }
+    
+    [Test]
+    public void BackstagePassQualityZeroAfterSellBy()
+    {
+        var items = new List<Item> { new Item { Name = BACKSTAGE_PASS_ITEM_NAME, SellIn = 0, Quality = 0 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(0));
     }
 }
