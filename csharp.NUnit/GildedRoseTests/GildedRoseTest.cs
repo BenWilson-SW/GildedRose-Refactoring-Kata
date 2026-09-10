@@ -43,7 +43,7 @@ public class GildedRoseTest
     }
     
     [Test]
-    public void ItemQualityDecreasesFasterAfterSellBy()
+    public void ItemQualityDecreasesDoubleAfterSellBy()
     {
         var items = new List<Item> { new Item { Name = "Example", SellIn = -1, Quality = 10 } };
         var app = new GildedRose(items);
