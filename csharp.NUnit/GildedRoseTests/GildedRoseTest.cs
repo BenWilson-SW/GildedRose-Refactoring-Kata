@@ -45,7 +45,7 @@ public class GildedRoseTest
     [Test]
     public void ItemQualityDecreasesNormallyAtSellBy()
     {
-        var items = new List<Item> { new Item { Name = "Example", SellIn = 10, Quality = 10 } };
+        var items = new List<Item> { new Item { Name = "Example", SellIn = 0, Quality = 10 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(9));
