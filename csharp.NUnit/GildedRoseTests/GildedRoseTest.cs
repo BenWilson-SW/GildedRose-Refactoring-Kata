@@ -128,4 +128,13 @@ public class GildedRoseTest
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(0));
     }
+    
+    [Test]
+    public void QualityCanNotBeOverFifty()
+    {
+        var items = new List<Item> { new Item { Name = BACKSTAGE_PASS_ITEM_NAME, SellIn = 1, Quality = 49 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(50));
+    }
 }
