@@ -11,6 +11,7 @@ public class GildedRoseTest
     const String SULFURAS_ITEM_NAME = "Sulfuras, Hand of Ragnaros";
     const String AGED_BRIE_ITEM_NAME = "Aged Brie";
     const String BACKSTAGE_PASS_ITEM_NAME = "Backstage passes to a TAFKAL80ETC concert";
+    const String CONJURED_ITEM_NAME = "Conjured Mana Cake";
     
     [Test]
     public void PositiveItemSellInDecreases()
@@ -145,5 +146,23 @@ public class GildedRoseTest
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(50));
+    }
+    
+    [Test]
+    public void ConjuredItemsLoseQualityDouble()
+    {
+        var items = new List<Item> { new Item { Name = CONJURED_ITEM_NAME, SellIn = 10, Quality = 10 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(4));
+    }
+    
+    [Test]
+    public void ConjuredItemsLoseQualityQuadruplePastSellBy()
+    {
+        var items = new List<Item> { new Item { Name = CONJURED_ITEM_NAME, SellIn = 0, Quality = 10 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(6));
     }
 }
