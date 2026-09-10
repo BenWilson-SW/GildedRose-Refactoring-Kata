@@ -68,4 +68,22 @@ public class GildedRoseTest
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(80));
     }
+
+    [Test]
+    public void AgedBrieQualityIncreases()
+    {
+        var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 10, Quality = 0 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(1));
+    }
+    
+    [Test]
+    public void AgedBrieQualityIncreasesDoublePastSellBy()
+    {
+        var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = -5, Quality = 0 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(2));
+    }
 }
