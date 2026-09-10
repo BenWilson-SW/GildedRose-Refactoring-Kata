@@ -49,6 +49,15 @@ public class GildedRoseTest
     }
     
     [Test]
+    public void ItemQualityDecreasesDoubleAtSellBy()
+    {
+        var items = new List<Item> { new Item { Name = NORMAL_ITEM_NAME, SellIn = 0, Quality = 10 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(8));
+    }
+    
+    [Test]
     public void ItemQualityDecreasesDoubleAfterSellBy()
     {
         var items = new List<Item> { new Item { Name = NORMAL_ITEM_NAME, SellIn = -1, Quality = 10 } };
