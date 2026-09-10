@@ -32,6 +32,9 @@ public class GildedRose
                 case "Backstage passes to a TAFKAL80ETC concert":
                     newQuality = GetNewBackstagePassQuality(item);
                     break;
+                case "Conjured Mana Cake":
+                    newQuality = GetNewConjuredQuality(item);
+                    break;
                 default:
                     newQuality = GetNewItemQuality(item);
                     break;
@@ -70,6 +73,16 @@ public class GildedRose
         }
 
         return backstagePass.Quality + 1;
+    }
+
+    private int GetNewConjuredQuality(Item conjuredItem)
+    {
+        if (conjuredItem.SellIn <= 0)
+        {
+            return conjuredItem.Quality - 4;
+        }
+
+        return conjuredItem.Quality - 2;
     }
 
     private int GetNewItemQuality(Item item)
